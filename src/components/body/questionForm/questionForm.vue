@@ -1,10 +1,11 @@
 <template>
-    <div class="form-container">
-        <div class="question-form">
-            <v-text-field type="number" name="numberOfQuestions" min="1" max="50" v-model="numberOfQuestions"></v-text-field>
-            <v-select :items="difficulties" v-model="difficulty" label="Difficulty" attach></v-select>
-            <v-btn v-on:click="submit">Submit</v-btn>
-        </div>
+    <div class="question-form container">
+        <h1>Welcome to the Super Quiz!</h1>
+        <v-form v-model="valid">
+            <v-text-field type="number" min="1" max="50" v-model="numberOfQuestions" label="Number of questions" :rules="rules.numberOfQuestion" required></v-text-field>
+            <v-select :items="difficulties" v-model="difficulty" label="Choose a difficulty level" attach :rules="rules.difficulty" required></v-select>
+            <v-btn class="primary" v-on:click="submit" :disabled="!valid">Submit</v-btn>
+        </v-form>
     </div>
 </template>
 
@@ -14,10 +15,15 @@
     export default {
         name: 'questionForm',
         data: () => ({
+            valid: false,
             numberOfQuestions: 0,
             difficulty: '',
             questions: [],
-            difficulties: ['easy', 'medium', 'hard']
+            difficulties: ['easy', 'medium', 'hard'],
+            rules: {
+                numberOfQuestion: [value => value > 0 && value < 50 || 'The number needs to be between 0 and 50'],
+                difficulty: [value => !!value || 'Difficulty level is required']
+            }
         }),
         methods: {
             submit: function () {

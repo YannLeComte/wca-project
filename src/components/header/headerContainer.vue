@@ -1,8 +1,7 @@
 <template>
     <div class="header-container">
-        <v-toolbar>
-            <v-toolbar-side-icon></v-toolbar-side-icon>
-            <v-toolbar-title>We Craft Apps: Technical exercise</v-toolbar-title>
+        <v-toolbar class="primary">
+            <v-toolbar-title class="title">Super quiz</v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
     </div>
@@ -14,5 +13,11 @@
 </script>
 
 <style scoped>
-
+    .header-container .title {
+        color: #fff;
+    }
+    .header-container {
+        position: fixed;
+        width: 100%;
+    }
 </style>

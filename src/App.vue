@@ -1,8 +1,11 @@
 <template>
     <div id="app">
-        <header-container></header-container>
-        <body-container></body-container>
-        <footerContainer></footerContainer>
+        <v-app light>
+            <header-container></header-container>
+            <div class="top-nav-margin"></div>
+            <body-container></body-container>
+            <footerContainer></footerContainer>
+        </v-app>
     </div>
 </template>
 
@@ -19,10 +22,31 @@
 </script>
 
 <style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        color: #2c3e50;
+    html {
+        overflow: initial!important;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .application {
+        background-color: #fff!important;
+    }
+    button {
+        width: 100%;
+        margin: 0!important;
+    }
+    .container {
+        padding: 30px;
+        width: 100%;
+    }
+
+    .radio-group .v-input__slot{
+        margin-bottom:0!important;
+    }
+    .top-nav-margin {
+        height:64px;
+        width:100%;
     }
 </style>

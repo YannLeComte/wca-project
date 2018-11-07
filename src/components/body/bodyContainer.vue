@@ -1,38 +1,36 @@
 <template>
     <div class="body-container">
-        <div v-if="isQuizzInProcess">
+        <div v-if="isQuizInProcess">
             <question-form v-if="questions.length <= 0" v-on:form-submitted="onSubmitForm"></question-form>
-            <quizz v-if="questions.length > 0" v-bind:questions="questions" v-on:quizz-finished="onQuizzFinished"></quizz>
+            <quiz-container v-if="questions.length > 0" v-bind:questions="questions" v-on:quiz-finished="onQuizFinished"></quiz-container>
         </div>
-        <results v-if="!isQuizzInProcess" v-bind:userAnswers="userAnswers" v-on:quizz-restart="onQuizzRestart"></results>
+        <results v-if="!isQuizInProcess" v-bind:userAnswers="userAnswers" v-on:quiz-restart="onQuizRestart"></results>
     </div>
 </template>
 <script>
     import QuestionForm from "./questionForm/questionForm";
-    import Quizz from "./quizz/quizz";
+    import QuizContainer from "./quiz/quizContainer";
     import Results from "./results/results";
 
     export default {
-        components: {Results, QuestionForm, Quizz},
+        components: {Results, QuestionForm, QuizContainer},
         name: 'bodyContainer',
-        data() {
-            return {
+        data: () => ({
                 questions: [],
-                isQuizzInProcess: true,
+                isQuizInProcess: true,
                 userAnswers: []
-            }
-        },
+        }),
         methods: {
             onSubmitForm: function (question) {
                 this.questions = question;
             },
-            onQuizzFinished: function (userAnswers) {
+            onQuizFinished: function (userAnswers) {
                 this.userAnswers = userAnswers;
-                this.isQuizzInProcess = false;
+                this.isQuizInProcess = false;
             },
-            onQuizzRestart: function () {
+            onQuizRestart: function () {
                 this.questions = [];
-                this.isQuizzInProcess = true;
+                this.isQuizInProcess = true;
                 this.userAnswers = [];
             }
         }
@@ -43,5 +41,8 @@
     .body-container {
         width: 50%;
         margin: auto;
+        min-width: 300px;
+        background-color: #dedede0d;
+        box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
     }
 </style>

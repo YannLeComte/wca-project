@@ -2,7 +2,7 @@
     <div class="footer-container">
         <v-footer class="pa-3">
             <v-spacer></v-spacer>
-            <div>&copy; {{ new Date().getFullYear() }}</div>
+            <div>Made by Yann Le Comte</div>
         </v-footer>
     </div>
 </template>
@@ -14,7 +14,6 @@
 
 <style scoped>
     .footer-container {
-        position: absolute;
         bottom: 0;
         width: 100%;
     }
