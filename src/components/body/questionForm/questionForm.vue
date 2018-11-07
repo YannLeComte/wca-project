@@ -1,13 +1,9 @@
 <template>
     <div class="form-container">
         <div class="question-form">
-            <input type="number" name="numberOfQuestions" min="1" max="50" v-model="numberOfQuestions">
-            <select v-model="difficulty">
-                <option value="easy" selected>Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
-            <button v-on:click="submit">Submit</button>
+            <v-text-field type="number" name="numberOfQuestions" min="1" max="50" v-model="numberOfQuestions"></v-text-field>
+            <v-select :items="difficulties" v-model="difficulty" label="Difficulty" attach></v-select>
+            <v-btn v-on:click="submit">Submit</v-btn>
         </div>
     </div>
 </template>
@@ -17,13 +13,12 @@
 
     export default {
         name: 'questionForm',
-        data() {
-            return {
-                numberOfQuestions: 0,
-                difficulty: '',
-                questions: []
-            }
-        },
+        data: () => ({
+            numberOfQuestions: 0,
+            difficulty: '',
+            questions: [],
+            difficulties: ['easy', 'medium', 'hard']
+        }),
         methods: {
             submit: function () {
                 questionsAPI.get(this.numberOfQuestions, this.difficulty)

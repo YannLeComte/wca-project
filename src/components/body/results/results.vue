@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>{{percentage}} %</p>
-        <button v-on:click="restartQuizz">Restart</button>
+        <v-btn v-on:click="restartQuizz">Restart</v-btn>
     </div>
 </template>
 <script>

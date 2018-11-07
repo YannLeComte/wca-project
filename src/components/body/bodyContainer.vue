@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="body-container">
         <div v-if="isQuizzInProcess">
             <question-form v-if="questions.length <= 0" v-on:form-submitted="onSubmitForm"></question-form>
             <quizz v-if="questions.length > 0" v-bind:questions="questions" v-on:quizz-finished="onQuizzFinished"></quizz>
@@ -40,4 +40,8 @@
 </script>
 
 <style scoped>
+    .body-container {
+        width: 50%;
+        margin: auto;
+    }
 </style>

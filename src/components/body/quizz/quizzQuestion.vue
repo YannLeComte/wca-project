@@ -2,12 +2,11 @@
     <div class="quiz">
         <p v-if="question">{{question.question}}</p>
         <div v-if="answers && answers.length > 0">
-            <div v-for="(answer, index) in answers" :key="index">
-                <input type="radio" name="feature" :value="answer" v-model="selectedAnswer" :disabled="isValidated"/>
-                <label :for="answer">{{answer}}</label>
-            </div>
+            <v-radio-group v-model="selectedAnswer">
+                <v-radio v-for="answer in answers" :label="answer" :value="answer" :disabled="isValidated"></v-radio>
+            </v-radio-group>
         </div>
-        <button v-on:click="validate" :disabled="isValidated">Validate answer</button>
+        <v-btn v-on:click="validate" v-if="!isValidated">Validate answer</v-btn>
         <quizz-answer v-if="isValidated" v-bind:isAnswerCorrect="question.correct_answer === selectedAnswer" v-bind:correctAnswer="question.correct_answer"></quizz-answer>
     </div>
 </template>
@@ -26,6 +25,7 @@
         },
         created() {
             this.shuffle();
+            this.isValidated = false
         },
         methods: {
             shuffle: function () {

@@ -1,7 +1,7 @@
 <template>
   <div class="quiz">
       <quizz-question v-bind:question="questions[selectedQuestionIndex]" v-on:question-answered="onQuestionAnswered"></quizz-question>
-      <button v-on:click="nextQuestion" v-if="selectedQuestionIndex + 1 === this.userAnswers.length">Next</button>
+      <v-btn v-on:click="nextQuestion" v-if="selectedQuestionIndex + 1 === this.userAnswers.length">Next</v-btn>
   </div>
 </template>
 
