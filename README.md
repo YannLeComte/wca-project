@@ -1,4 +1,4 @@
-# wcaproject
+# We Craft Apps: Super Quiz
 
 ## Project setup
 ```
