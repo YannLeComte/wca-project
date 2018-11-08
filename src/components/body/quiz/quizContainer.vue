@@ -17,6 +17,15 @@
 <script>
     import QuizQuestion from "./quizQuestion";
 
+    /* Main component for the Quiz, contains:
+    * - the number of the question
+    * - The component with the question
+    * - The Next button
+    *
+    * This component has the questions list as props,
+    * and will pass them one by one, to the quiz-question component
+    * */
+
     export default {
         components: {QuizQuestion},
         name: 'quizzContainer',
@@ -25,10 +34,9 @@
             userAnswers: []
         }),
         props: ['questions'],
-        created() {
-        },
         methods: {
             nextQuestion: function () {
+                /* Select the next question, or the emit that the quiz is finished*/
                 if (this.selectedQuestionIndex < this.questions.length - 1 ) {
                     this.selectedQuestionIndex++;
                 } else {
@@ -36,6 +44,7 @@
                 }
             },
             onQuestionAnswered: function (isAnswerCorrect) {
+                /* when a new answer is received, store the result (boolean)*/
                 this.userAnswers.push(isAnswerCorrect);
             }
         }
@@ -53,5 +62,4 @@
         margin: auto;
         margin-top: 10px;
     }
-
 </style>

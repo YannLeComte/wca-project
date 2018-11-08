@@ -12,13 +12,24 @@
                       label="Choose a difficulty level" attach
                       :rules="rules.difficulty" required>
             </v-select>
-            <v-btn block class="primary" @click="submit" :disabled="!valid">Submit</v-btn>
+            <v-btn block class="primary"
+                   @click="GetQuestions"
+                   :disabled="!valid">Start the super quiz!
+            </v-btn>
         </v-form>
     </div>
 </template>
 
 <script>
     import questionsAPI from '../../../api/questions'
+
+    /* This component is a form to enter a number of questions and a difficulty,
+    * it will return a list of question with an emit to 'form-submitted'
+    *
+    * Rules:
+    * - The number of question needs to be between 0 and 50
+    * - Both inputs are required
+    * */
 
     export default {
         name: 'questionForm',
@@ -34,7 +45,8 @@
             }
         }),
         methods: {
-            submit: function () {
+            GetQuestions: function () {
+                 /* Get the list of question form the API */
                 questionsAPI.get(this.numberOfQuestions, this.difficulty)
                     .then(posts => {
                         this.questions = posts;

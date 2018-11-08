@@ -8,6 +8,13 @@
     </div>
 </template>
 <script>
+    /* This component is the body of the application
+    * it allows the switch between the different views:
+    * - The form to the start the quiz
+    * - The Quiz
+    * - The results of the quiz
+    * */
+
     import QuestionForm from "./questionForm/questionForm";
     import QuizContainer from "./quiz/quizContainer";
     import Results from "./results/results";

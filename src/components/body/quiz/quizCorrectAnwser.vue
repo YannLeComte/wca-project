@@ -5,12 +5,13 @@
         </v-alert>
         <v-alert :value="!isAnswerCorrect"
                  type="error"
-                 icon="cancel">You're wrong! it was '{{correctAnswer}}'
+                 icon="cancel">You're wrong! it was '<span v-html="correctAnswer"></span>'
         </v-alert>
     </div>
 </template>
 
 <script>
+    /* This component displays if the answer chosen was true or false */
     export default {
         name: 'quizCorrectAnswer',
         props: [

@@ -6,6 +6,7 @@
     </div>
 </template>
 <script>
+    /* The components shows the results of the quiz with a percentage */
     export default {
         name: 'results',
         props: ['userAnswers'],
@@ -15,6 +16,7 @@
             }
         },
         created() {
+            /* Calculate the score with the list of answers (booleans)*/
             let numberOfCorrectAnswers = 0;
             for (let item of this.userAnswers) {
                 if (item === true) {

@@ -28,6 +28,14 @@
 <script>
     import QuizCorrectAnswer from "./quizCorrectAnwser";
     import QuizAnswerButton from "./quizAnswerButton";
+
+    /* This components contains:
+    * - The question
+    * - The list of answers
+    * - The button to validate
+    * - the component to display the correct answer
+    * */
+
     export default {
         components: {QuizAnswerButton, QuizCorrectAnswer},
         name: 'quizQuestion',
@@ -43,6 +51,7 @@
         },
         methods: {
             shuffle: function () {
+                /* Put the correct answer in a random position */
                 this.answers = this.question.incorrect_answers;
                 let numberOfAnswers = this.question.incorrect_answers.length + 1;
                 let randomIndex = Math.floor(Math.random() * numberOfAnswers) + 1;
@@ -58,6 +67,7 @@
         },
         watch: {
             question: function() {
+                /* If the question is changed, update the list of answers */
                 this.shuffle();
                 this.isAnswerValidated = false;
             }

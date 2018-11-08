@@ -10,6 +10,13 @@
 </template>
 
 <script>
+    /* The component is a button that displays an answer.
+    * If the button is selected, if will be outlined.
+    * If the answer is validated, it will be disabled.
+    * If the answer is validated and was the one selected,
+    * the color will change, depending if the answer was correct or wrong
+    */
+
     export default {
         name: 'quizAnswerButton',
         props: [
@@ -23,6 +30,7 @@
         }),
         methods: {
             onAnswerSelected() {
+                /* On click on the button, emit the value of the answer */
                 if (!this.isAnswerValidated) {
                     this.isAnswerSelected = !this.isAnswerSelected;
                     if (this.isAnswerSelected) {
@@ -33,6 +41,7 @@
                 }
             },
             getValidatedColor() {
+                /* If the answer was validated and selected, change the color */
                 if (this.isAnswerValidated && this.selectedAnswer === this.answer) {
                     if (this.answer === this.correctAnswer ) {
                         return 'correctAnswer';
@@ -44,6 +53,8 @@
         },
         watch: {
             selectedAnswer: function () {
+                /* If another answer was selected deselect this one,
+                * there are never multiple choices */
                 this.isAnswerSelected = this.selectedAnswer === this.answer
             }
         }
@@ -57,9 +68,8 @@
     .quiz-answer-button button {
         height: 60px;
     }
-    .theme--light.v-btn.v-btn--disabled:not(.v-btn--icon):not(.v-btn--flat){
-        background-color: rgba(0,0,0,.12)!important;
-    }
+
+    /* Overwrite the disabled colors */
     .theme--light.v-btn.v-btn--disabled:not(.v-btn--icon):not(.v-btn--flat).correctAnswer{
         background-color: #4caf50!important;
         color: white!important;
