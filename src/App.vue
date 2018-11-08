@@ -1,12 +1,10 @@
 <template>
-    <div id="app">
-        <v-app light>
-            <header-container></header-container>
-            <div class="top-nav-margin"></div>
-            <body-container></body-container>
-            <footerContainer></footerContainer>
-        </v-app>
-    </div>
+    <v-app light>
+        <header-container></header-container>
+        <div class="top-nav-margin"></div>
+        <body-container></body-container>
+        <footerContainer></footerContainer>
+    </v-app>
 </template>
 
 <script>
@@ -38,9 +36,6 @@
         margin: 0!important;
     }
 
-    .radio-group .v-input__slot{
-        margin-bottom:0!important;
-    }
     .top-nav-margin {
         height:64px;
         width:100%;
