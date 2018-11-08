@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h1>Your final score is:</h1>
-        <p class="score">{{percentage}} %</p>
-        <v-btn class="primary" v-on:click="restartQuiz">Restart</v-btn>
+        <p class="score">{{Math.round(percentage)}} %</p>
+        <v-btn block class="primary" @click="restartQuiz">Restart</v-btn>
     </div>
 </template>
 <script>

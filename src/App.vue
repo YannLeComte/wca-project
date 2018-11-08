@@ -33,13 +33,9 @@
     .application {
         background-color: #fff!important;
     }
+
     button {
-        width: 100%;
         margin: 0!important;
-    }
-    .container {
-        padding: 30px;
-        width: 100%;
     }
 
     .radio-group .v-input__slot{

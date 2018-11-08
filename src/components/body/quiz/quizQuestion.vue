@@ -2,37 +2,44 @@
     <div class="quiz">
         <p class="question" v-if="question" v-html="question.question"></p>
         <div class="container" v-if="answers && answers.length > 0">
-            <v-radio-group class="radio-group" v-model="selectedAnswer" :disabled="isValidated">
-                <div v-for="answer in answers" :key="answer" class="radio-container">
-                    <v-radio :value="answer"></v-radio>
-                    <label v-html="answer"></label>
-                </div>
-            </v-radio-group>
-            <v-btn class="primary" v-on:click="validate" v-if="!isValidated" :disabled="selectedAnswer === ''">Validate answer</v-btn>
+            <div class="answers-container">
+                <quiz-answer-button v-for="answer in answers" :key="answer"
+                                    :selectedAnswer="selectedAnswer"
+                                    :answer="answer"
+                                    :correctAnswer="question.correct_answer"
+                                    :isAnswerValidated="isAnswerValidated"
+                                    @answer-selected="onAnswerSelected">
+                </quiz-answer-button>
+            </div>
         </div>
-        <quiz-answer
-                v-if="isValidated"
-                v-bind:isAnswerCorrect="question.correct_answer === selectedAnswer"
-                v-bind:correctAnswer="question.correct_answer">
-        </quiz-answer>
+        <div class="container validation" v-if="!isAnswerValidated">
+            <v-btn class="primary" block
+                   @click="validate"
+                   :disabled="selectedAnswer === ''">Validate answer</v-btn>
+        </div>
+        <quiz-correct-answer
+                v-if="isAnswerValidated"
+                :isAnswerCorrect="question.correct_answer === selectedAnswer"
+                :correctAnswer="question.correct_answer">
+        </quiz-correct-answer>
     </div>
 </template>
 
 <script>
-    import QuizAnswer from "./quizAnwser";
-    import VLabel from "vuetify/lib/components/VLabel/VLabel";
+    import QuizCorrectAnswer from "./quizCorrectAnwser";
+    import QuizAnswerButton from "./quizAnswerButton";
     export default {
-        components: {VLabel, QuizAnswer},
+        components: {QuizAnswerButton, QuizCorrectAnswer},
         name: 'quizQuestion',
         props: ['question'],
         data: () => ({
             answers: [],
             selectedAnswer: '',
-            isValidated: false
+            isAnswerValidated: false
         }),
         created() {
             this.shuffle();
-            this.isValidated = false
+            this.isAnswerValidated = false
         },
         methods: {
             shuffle: function () {
@@ -42,14 +49,17 @@
                 this.answers.splice(randomIndex, 0, this.question.correct_answer);
             },
             validate: function () {
-                this.isValidated = true;
+                this.isAnswerValidated = true;
                 this.$emit('question-answered', this.question.correct_answer === this.selectedAnswer);
+            },
+            onAnswerSelected: function (answer) {
+                this.selectedAnswer = answer;
             }
         },
         watch: {
             question: function() {
                 this.shuffle();
-                this.isValidated = false;
+                this.isAnswerValidated = false;
             }
         }
     }
@@ -59,23 +69,32 @@
     .question {
         font-size: 18px;
         font-weight: 300;
-        padding: 10px;
-        background-color: #574cff40;
+        background-color: #d9d8e640;
         margin-bottom: 0;
-    }
-    .radio-container {
-        padding: 5px;
-        display: inline-flex;
+        padding: 0 34px 34px 34px;
+        text-align: center;
     }
 
-    .radio-container label {
-        color: rgba(0,0,0,.54);
+    .answers-container {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 50% 50%;
     }
 
-    .radio-group {
-        margin: 0;
+    .container.validation {
+        padding-top: 0;
     }
-    .v-input__slot {
-        margin:0;
+
+    .quiz-answer-button:nth-child(even) {
+        padding-right: 0;
+    }
+    .quiz-answer-button:nth-child(odd) {
+        padding-left: 0;
+    }
+    .quiz-answer-button:nth-child(1), .quiz-answer-button:nth-child(2) {
+        padding-top: 0;
+    }
+    .quiz-answer-button:last-child, .quiz-answer-button:nth-last-of-type(-n+2) {
+        padding-bottom: 0;
     }
 </style>

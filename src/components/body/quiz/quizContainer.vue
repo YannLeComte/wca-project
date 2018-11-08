@@ -1,11 +1,15 @@
 <template>
     <div class="quiz">
-        <div class="container">
-            <h1>Question {{selectedQuestionIndex + 1}}</h1>
+        <div class="container question-header">
+            <h1>Question {{selectedQuestionIndex + 1}} / {{questions.length}}</h1>
+            <div class="line"></div>
         </div>
-        <quiz-question v-bind:question="questions[selectedQuestionIndex]" v-on:question-answered="onQuestionAnswered"></quiz-question>
+        <quiz-question
+                :question="questions[selectedQuestionIndex]"
+                @question-answered="onQuestionAnswered">
+        </quiz-question>
         <div class="container" v-if="selectedQuestionIndex + 1 === this.userAnswers.length">
-            <v-btn class="primary" v-on:click="nextQuestion">Next</v-btn>
+            <v-btn block class="primary" @click="nextQuestion">Next</v-btn>
         </div>
     </div>
 </template>
@@ -39,4 +43,15 @@
 </script>
 
 <style scoped>
+    .question-header {
+        background-color: #d9d8e640;
+        padding-bottom: 10px;
+    }
+    .line {
+        width: 60%;
+        border-top: 2px solid;
+        margin: auto;
+        margin-top: 10px;
+    }
+
 </style>

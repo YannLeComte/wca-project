@@ -2,9 +2,17 @@
     <div class="question-form container">
         <h1>Welcome to the Super Quiz!</h1>
         <v-form v-model="valid">
-            <v-text-field type="number" min="1" max="50" v-model="numberOfQuestions" label="Number of questions" :rules="rules.numberOfQuestion" required></v-text-field>
-            <v-select :items="difficulties" v-model="difficulty" label="Choose a difficulty level" attach :rules="rules.difficulty" required></v-select>
-            <v-btn class="primary" v-on:click="submit" :disabled="!valid">Submit</v-btn>
+            <v-text-field type="number" min="1" max="50"
+                          v-model="numberOfQuestions"
+                          label="Number of questions"
+                          :rules="rules.numberOfQuestion" required>
+            </v-text-field>
+            <v-select :items="difficulties"
+                      v-model="difficulty"
+                      label="Choose a difficulty level" attach
+                      :rules="rules.difficulty" required>
+            </v-select>
+            <v-btn block class="primary" @click="submit" :disabled="!valid">Submit</v-btn>
         </v-form>
     </div>
 </template>

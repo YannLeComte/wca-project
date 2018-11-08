@@ -39,7 +39,7 @@
 
 <style scoped>
     .body-container {
-        width: 50%;
+        width: 60%;
         margin: auto;
         min-width: 300px;
         background-color: #dedede0d;
